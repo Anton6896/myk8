@@ -1,11 +1,11 @@
-# show all data at ubuntu 
+### show all data at ubuntu 
 - microk8s kubectl get all --all-namespaces
 - microk8s dashboard-proxy
-# start stop 
+### start stop 
 - microk8s start
 - microk8s stop
  
- 
+
 # youtube lesson   
 https://www.youtube.com/watch?v=X48VuDVv0do&ab_channel=TechWorldwithNana
 
