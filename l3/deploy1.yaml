@@ -2,32 +2,39 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: my-app
+  name: nginx-ant
   labels:
-    app: my-app
+    app: nginx-ant
 
 spec:
   replicas: 2
   strategy:
-    rollingUpdate:  # no downtime on replica update
+    rollingUpdate:  # no downtime on replica update can be configured through this conf
       maxSurge: 25%
       maxUnavailable: 25%
   selector:
     matchLabels:
-      app: my-app
+      app: nginx-ant
   template:
     metadata:
       labels:
-        app: my-app
+        app: nginx-ant
     spec:
       containers:
-        - name: my-app
-          image: nginx:alpine
+        - image: nginx:1.22.0
+          name: nginx-ant
           env:
             - name: SOME_ENV
               value: $SOME_ENV
           ports:
             - containerPort: 8080
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
 
 ---
 

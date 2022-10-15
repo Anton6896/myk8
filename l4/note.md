@@ -1,0 +1,1 @@
+ - config map will hold global env vars , do not use it for secrets  
