@@ -8,6 +8,10 @@ metadata:
 
 spec:
   replicas: 2
+  strategy:
+    rollingUpdate:  # no downtime on replica update
+      maxSurge: 25%
+      maxUnavailable: 25%
   selector:
     matchLabels:
       app: my-app
