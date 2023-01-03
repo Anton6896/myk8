@@ -128,7 +128,8 @@ my-replicaset-szqgz   1/1       Running       0          6m
 Для этого выполним команду:
 
 ```bash
-kubectl set image replicaset my-replicaset nginx=nginx:1.13
+kubectl set image replicaset my-replicaset nginx=nginx:1.13  
+# kubectl set image replicaset my-replicaset *=nginx:1.13  
 ```
 
 Проверяем результат, для этого выполним команду:
