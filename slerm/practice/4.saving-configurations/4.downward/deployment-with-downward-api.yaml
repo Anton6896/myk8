@@ -29,6 +29,7 @@ spec:
                 secretKeyRef:
                   name: test
                   key: test1
+            # downward 
             - name: __NODE_NAME
               valueFrom:
                 fieldRef:
@@ -53,6 +54,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.serviceAccountName
+            # ------------
           ports:
             - containerPort: 80
           resources:
@@ -67,6 +69,7 @@ spec:
               mountPath: /etc/nginx/conf.d/
             - name: podinfo
               mountPath: /etc/podinfo
+
       volumes:
         - name: config
           configMap:

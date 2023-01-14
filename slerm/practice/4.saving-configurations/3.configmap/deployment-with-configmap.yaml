@@ -28,6 +28,7 @@ spec:
           name: nginx
           ports:
             - containerPort: 80
+            
           resources:
             requests:
               cpu: 10m
@@ -35,10 +36,13 @@ spec:
             limits:
               cpu: 100m
               memory: 100Mi
+
           volumeMounts:
-            - name: config
+            - name: my-nginx-config
               mountPath: /etc/nginx/conf.d/
+
       volumes:
-        - name: config
+        - name: my-nginx-config
           configMap:
             name: my-configmap
+...

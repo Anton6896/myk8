@@ -12,7 +12,7 @@ data:
         default_type text/plain;
 
         location / {
-            return 200 '$hostname\n';
+            return 200 '$hostname\n ok\n';
         }
     }
 ...

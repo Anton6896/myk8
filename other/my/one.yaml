@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  minReadySeconds: 30
+  selector:
+    matchLabels:
+      app: webapp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+        - name: webapp
+          image: nodejs-helloworld:v1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+
+spec:
+  selector:
+    app: webapp
+
+  ports:
+    - name: http
+      port: 3000
+      nodePort: 30090 # only for NotPort > 30,000
+
+  type: NodePort #ClusterIP inside cluster
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webapp-ingress
+spec:
+  defaultBackend:
+    service:
+      name: webapp-service
+      port:
+        number: 3000
+  rules:
+    - host: ingress.local  # kubernetes.docker.internal <- try as localhost
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: webapp-service
+                port:
+                  number: 3000
