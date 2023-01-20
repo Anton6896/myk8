@@ -14,6 +14,9 @@ kubectl apply -f ~/school-dev-k8s/practice/4.saving-configurations/1.env/deploym
 
 ```bash
 kubectl describe pod my-deployment-< RANDOM >
+
+# go inside container (same as docker)
+kubectl exec -it my-deployment-8dcfb6779-qxq7q -- bash
 ```
 
 Результат должен содержать:
