@@ -1,0 +1,25 @@
+---
+# file: practice/2.application-abstractions/3.deployment/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - image: k8-test:ant
+          name: ant-k8-test
+          ports:
+            - containerPort: 8888
+---
+# k edit deployments.apps
+
+# https://www.youtube.com/watch?v=LLVfC08UVqY&list=PL8D2P0ruohOBSA_CDqJLflJ8FLJNe26K-&index=3&ab_channel=%D0%A1%D0%BB%D1%91%D1%80%D0%BC

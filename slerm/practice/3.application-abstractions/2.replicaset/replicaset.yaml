@@ -1,0 +1,25 @@
+---
+# file: practice/2.application-abstractions/2.replicaset/replicaset.yaml
+apiVersion: apps/v1
+kind: ReplicaSet  # see docs for more 
+metadata:
+  name: my-replicaset  # visual naming
+spec:
+  replicas: 2  # how many pods
+  selector:
+    matchLabels:
+      app: ant-app  # inner name for selector
+  template:
+    metadata:
+      labels:  # will be as key in lookup -> for k8n and for you too (can search by label) -> k get pod -l app=ant-app
+        app: ant-app  # selector will watch this one
+    spec:
+      containers:
+      - image: k8-test:ant
+        name: ant-test
+        ports:
+        - containerPort: 8888  # for info only (not functional)
+...
+
+# kubectl delete pod | replicaset --all  <- danger  | -f (file)
+# 

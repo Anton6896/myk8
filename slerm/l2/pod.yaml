@@ -1,0 +1,24 @@
+---
+# file: practice/2.application-abstractions/1.pod/pod.yaml
+
+# docker run --rm -it -p 8888:8888 k8-test:ant
+# curl --location --request GET 'http://localhost:8888/'
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ant-pod  # unique for namespace
+spec:
+  containers: # list of objects
+  - image: k8-test:ant
+    name: antApp
+    ports:  # only for user view (have no action to actual process)
+    - containerPort: 8888
+  - image: k8-test:ant
+    name: antApp-2
+    ports:  # only for user view (have no action to actual process)
+    - containerPort: 8888
+...
+
+# describe == inspect in docker
+# delete pod <name> 
+# delete -f pod.yaml
