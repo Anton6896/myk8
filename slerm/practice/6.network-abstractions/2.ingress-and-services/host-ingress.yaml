@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: my-ingress-nginx
+  # also can use annotation
 spec:
   rules:
   - host: my.s<свой номер логина>.mcs.slurm.io
