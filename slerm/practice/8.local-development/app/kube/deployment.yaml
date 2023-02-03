@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp
+  name: mydeploy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: myapp
+      app: mytemapp
   template:
     metadata:
       labels:
-        app: myapp
+        app: mytemapp
     spec:
       containers:
         - name: api
-          image: myapp:dev
+          image: myapp:dev  # to build -> minikube image build -t myapp:dev .
           env:
             - name: PYTHONUNBUFFERED
               value: "1"
@@ -23,9 +23,23 @@ spec:
           ports:
             - containerPort: 8000
           volumeMounts:
-            - name: code
+            - name: dev-volume
               mountPath: /app
       volumes:
-        - name: code
+        - name: dev-volume
           hostPath:
-            path: /app
+            path: /app  # /Users/ant/Documents/myData/anton-code/myk8/slerm/practice/8.local-development/app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myservice
+spec:
+  type: LoadBalancer
+  selector:
+    app: mytemapp
+  ports:
+    - port: 8000
+      targetPort: 8000
+
+# `minikube image` is same as `docker`
